@@ -19,7 +19,7 @@ tokens = (
     'SEMICOLON',
     'ENTER',
     'parentesis_izq',
-    'parentesis_der',
+    'parentesis_der'
 )
 
 # Expresiones regulares para tokens simples
