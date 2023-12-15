@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BOOL ENTER ID NUM OPERATOR SEMICOLON do else endif if parentesis_der parentesis_izq read then wend while write\n    statement_list : statement_list statement ENTER\n                   | statement ENTER\n                   | statement_list statement\n                   | statement\n    \n    statement : read_statement\n              | if_statement\n              | while_statement\n              | write_statement\n    read_statement : read ID SEMICOLON\n    if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON\n                | if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON\n                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON\n                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON\n    condition : BOOL\n    while_statement : while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON\n                    | while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON\n    write_statement : write expression SEMICOLON\n    expression : ID\n               | NUM\n               | operando_statement\n    \n    operando_statement : expression OPERATOR expression    \n    '
+_lr_signature = 'BOOL ENTER EQUALS ID NUM OPERATOR SEMICOLON do else endif if parentesis_der parentesis_izq read then wend while write\n    statement_list : statement_list statement ENTER\n                   | statement ENTER\n                   | statement_list statement\n                   | statement\n    \n    statement : read_statement\n              | if_statement\n              | while_statement\n              | write_statement\n              | assignment_statement\n    assignment_statement : ID EQUALS expression SEMICOLONread_statement : read ID SEMICOLON\n    if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON\n                | if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON\n                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON\n                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON\n    condition : BOOL\n    while_statement : while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON\n                    | while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON\n    write_statement : write expression SEMICOLON\n    expression : ID\n               | NUM\n               | operando_statement\n    \n    operando_statement : expression OPERATOR expression    \n    '
     
-_lr_action_items = {'read':([0,1,2,3,4,5,6,11,12,20,21,28,39,40,41,42,43,44,45,46,53,54,55,56,57,58,59,60,63,64,],[7,7,-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,7,7,7,7,7,7,7,7,-10,7,-12,7,-15,-16,7,7,-11,-13,]),'if':([0,1,2,3,4,5,6,11,12,20,21,28,39,40,41,42,43,44,45,46,53,54,55,56,57,58,59,60,63,64,],[8,8,-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,8,8,8,8,8,8,8,8,-10,8,-12,8,-15,-16,8,8,-11,-13,]),'while':([0,1,2,3,4,5,6,11,12,20,21,28,39,40,41,42,43,44,45,46,53,54,55,56,57,58,59,60,63,64,],[9,9,-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,9,9,9,9,9,9,9,9,-10,9,-12,9,-15,-16,9,9,-11,-13,]),'write':([0,1,2,3,4,5,6,11,12,20,21,28,39,40,41,42,43,44,45,46,53,54,55,56,57,58,59,60,63,64,],[10,10,-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,10,10,10,10,10,10,10,10,-10,10,-12,10,-15,-16,10,10,-11,-13,]),'$end':([1,2,3,4,5,6,11,12,20,21,28,53,55,57,58,63,64,],[0,-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,-10,-12,-15,-16,-11,-13,]),'ENTER':([2,3,4,5,6,11,21,28,35,36,37,38,48,50,53,55,57,58,63,64,],[12,-5,-6,-7,-8,20,-9,-17,39,40,41,42,54,56,-10,-12,-15,-16,-11,-13,]),'endif':([2,3,4,5,6,11,12,20,21,28,43,44,53,55,57,58,59,60,63,64,],[-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,47,49,-10,-12,-15,-16,61,62,-11,-13,]),'else':([2,3,4,5,6,11,12,20,21,28,43,44,53,55,57,58,63,64,],[-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,48,50,-10,-12,-15,-16,-11,-13,]),'wend':([2,3,4,5,6,11,12,20,21,28,45,46,53,55,57,58,63,64,],[-4,-5,-6,-7,-8,-3,-2,-1,-9,-17,51,52,-10,-12,-15,-16,-11,-13,]),'ID':([7,10,14,15,29,],[13,17,17,17,17,]),'parentesis_izq':([8,9,],[14,15,]),'NUM':([10,14,15,29,],[18,18,18,18,]),'SEMICOLON':([13,16,17,18,19,34,47,49,51,52,61,62,],[21,28,-18,-19,-20,-21,53,55,57,58,63,64,]),'BOOL':([14,15,],[24,24,]),'OPERATOR':([16,17,18,19,23,25,27,34,],[29,-18,-19,-20,-20,29,-20,29,]),'parentesis_der':([17,18,19,22,23,24,26,27,34,],[-18,-19,-20,30,31,-14,32,33,-21,]),'then':([30,31,],[35,36,]),'do':([32,33,],[37,38,]),}
+_lr_action_items = {'read':([0,1,2,3,4,5,6,7,13,14,23,24,32,34,44,45,46,47,48,49,50,51,58,59,60,61,62,63,64,65,68,69,],[8,8,-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,8,8,8,8,8,8,8,8,-12,8,-14,8,-17,-18,8,8,-13,-15,]),'if':([0,1,2,3,4,5,6,7,13,14,23,24,32,34,44,45,46,47,48,49,50,51,58,59,60,61,62,63,64,65,68,69,],[10,10,-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,10,10,10,10,10,10,10,10,-12,10,-14,10,-17,-18,10,10,-13,-15,]),'while':([0,1,2,3,4,5,6,7,13,14,23,24,32,34,44,45,46,47,48,49,50,51,58,59,60,61,62,63,64,65,68,69,],[11,11,-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,11,11,11,11,11,11,11,11,-12,11,-14,11,-17,-18,11,11,-13,-15,]),'write':([0,1,2,3,4,5,6,7,13,14,23,24,32,34,44,45,46,47,48,49,50,51,58,59,60,61,62,63,64,65,68,69,],[12,12,-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,12,12,12,12,12,12,12,12,-12,12,-14,12,-17,-18,12,12,-13,-15,]),'ID':([0,1,2,3,4,5,6,7,8,12,13,14,16,17,18,23,24,32,33,34,44,45,46,47,48,49,50,51,58,59,60,61,62,63,64,65,68,69,],[9,9,-4,-5,-6,-7,-8,-9,15,20,-3,-2,20,20,20,-1,-11,-19,20,-10,9,9,9,9,9,9,9,9,-12,9,-14,9,-17,-18,9,9,-13,-15,]),'$end':([1,2,3,4,5,6,7,13,14,23,24,32,34,58,60,62,63,68,69,],[0,-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,-12,-14,-17,-18,-13,-15,]),'ENTER':([2,3,4,5,6,7,13,24,32,34,40,41,42,43,53,55,58,60,62,63,68,69,],[14,-5,-6,-7,-8,-9,23,-11,-19,-10,44,45,46,47,59,61,-12,-14,-17,-18,-13,-15,]),'endif':([2,3,4,5,6,7,13,14,23,24,32,34,48,49,58,60,62,63,64,65,68,69,],[-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,52,54,-12,-14,-17,-18,66,67,-13,-15,]),'else':([2,3,4,5,6,7,13,14,23,24,32,34,48,49,58,60,62,63,68,69,],[-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,53,55,-12,-14,-17,-18,-13,-15,]),'wend':([2,3,4,5,6,7,13,14,23,24,32,34,50,51,58,60,62,63,68,69,],[-4,-5,-6,-7,-8,-9,-3,-2,-1,-11,-19,-10,56,57,-12,-14,-17,-18,-13,-15,]),'EQUALS':([9,],[16,]),'parentesis_izq':([10,11,],[17,18,]),'NUM':([12,16,17,18,33,],[21,21,21,21,21,]),'SEMICOLON':([15,19,20,21,22,25,39,52,54,56,57,66,67,],[24,32,-20,-21,-22,34,-23,58,60,62,63,68,69,]),'BOOL':([17,18,],[28,28,]),'OPERATOR':([19,20,21,22,25,27,29,31,39,],[33,-20,-21,-22,33,-22,33,-22,33,]),'parentesis_der':([20,21,22,26,27,28,30,31,39,],[-20,-21,-22,35,36,-16,37,38,-23,]),'then':([35,36,],[40,41,]),'do':([37,38,],[42,43,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement_list':([0,39,40,41,42,54,56,],[1,43,44,45,46,59,60,]),'statement':([0,1,39,40,41,42,43,44,45,46,54,56,59,60,],[2,11,2,2,2,2,11,11,11,11,2,2,11,11,]),'read_statement':([0,1,39,40,41,42,43,44,45,46,54,56,59,60,],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,]),'if_statement':([0,1,39,40,41,42,43,44,45,46,54,56,59,60,],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,]),'while_statement':([0,1,39,40,41,42,43,44,45,46,54,56,59,60,],[5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'write_statement':([0,1,39,40,41,42,43,44,45,46,54,56,59,60,],[6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'expression':([10,14,15,29,],[16,25,25,34,]),'operando_statement':([10,14,15,29,],[19,23,27,19,]),'condition':([14,15,],[22,26,]),}
+_lr_goto_items = {'statement_list':([0,44,45,46,47,59,61,],[1,48,49,50,51,64,65,]),'statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[2,13,2,2,2,2,13,13,13,13,2,2,13,13,]),'read_statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,]),'if_statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,]),'while_statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'write_statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'assignment_statement':([0,1,44,45,46,47,48,49,50,51,59,61,64,65,],[7,7,7,7,7,7,7,7,7,7,7,7,7,7,]),'expression':([12,16,17,18,33,],[19,25,29,29,39,]),'operando_statement':([12,16,17,18,33,],[22,22,27,31,22,]),'condition':([17,18,],[26,30,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,25 +27,27 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement_list","S'",1,None,None,None),
-  ('statement_list -> statement_list statement ENTER','statement_list',3,'p_statement_list','malf.py',68),
-  ('statement_list -> statement ENTER','statement_list',2,'p_statement_list','malf.py',69),
-  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','malf.py',70),
-  ('statement_list -> statement','statement_list',1,'p_statement_list','malf.py',71),
-  ('statement -> read_statement','statement',1,'p_statement','malf.py',77),
-  ('statement -> if_statement','statement',1,'p_statement','malf.py',78),
-  ('statement -> while_statement','statement',1,'p_statement','malf.py',79),
-  ('statement -> write_statement','statement',1,'p_statement','malf.py',80),
-  ('read_statement -> read ID SEMICOLON','read_statement',3,'p_read_statement','malf.py',85),
-  ('if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON','if_statement',9,'p_if_statement','malf.py',90),
-  ('if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON','if_statement',12,'p_if_statement','malf.py',91),
-  ('if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON','if_statement',9,'p_if_statement','malf.py',92),
-  ('if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON','if_statement',12,'p_if_statement','malf.py',93),
-  ('condition -> BOOL','condition',1,'p_condition','malf.py',104),
-  ('while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON','while_statement',9,'p_while_statement','malf.py',109),
-  ('while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON','while_statement',9,'p_while_statement','malf.py',110),
-  ('write_statement -> write expression SEMICOLON','write_statement',3,'p_write_statement','malf.py',115),
-  ('expression -> ID','expression',1,'p_expression','malf.py',120),
-  ('expression -> NUM','expression',1,'p_expression','malf.py',121),
-  ('expression -> operando_statement','expression',1,'p_expression','malf.py',122),
-  ('operando_statement -> expression OPERATOR expression','operando_statement',3,'p_operando_statement','malf.py',127),
+  ('statement_list -> statement_list statement ENTER','statement_list',3,'p_statement_list','malf.py',70),
+  ('statement_list -> statement ENTER','statement_list',2,'p_statement_list','malf.py',71),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','malf.py',72),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','malf.py',73),
+  ('statement -> read_statement','statement',1,'p_statement','malf.py',79),
+  ('statement -> if_statement','statement',1,'p_statement','malf.py',80),
+  ('statement -> while_statement','statement',1,'p_statement','malf.py',81),
+  ('statement -> write_statement','statement',1,'p_statement','malf.py',82),
+  ('statement -> assignment_statement','statement',1,'p_statement','malf.py',83),
+  ('assignment_statement -> ID EQUALS expression SEMICOLON','assignment_statement',4,'p_assignment_statement','malf.py',88),
+  ('read_statement -> read ID SEMICOLON','read_statement',3,'p_read_statement','malf.py',92),
+  ('if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON','if_statement',9,'p_if_statement','malf.py',97),
+  ('if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON','if_statement',12,'p_if_statement','malf.py',98),
+  ('if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON','if_statement',9,'p_if_statement','malf.py',99),
+  ('if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON','if_statement',12,'p_if_statement','malf.py',100),
+  ('condition -> BOOL','condition',1,'p_condition','malf.py',105),
+  ('while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON','while_statement',9,'p_while_statement','malf.py',110),
+  ('while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON','while_statement',9,'p_while_statement','malf.py',111),
+  ('write_statement -> write expression SEMICOLON','write_statement',3,'p_write_statement','malf.py',116),
+  ('expression -> ID','expression',1,'p_expression','malf.py',121),
+  ('expression -> NUM','expression',1,'p_expression','malf.py',122),
+  ('expression -> operando_statement','expression',1,'p_expression','malf.py',123),
+  ('operando_statement -> expression OPERATOR expression','operando_statement',3,'p_operando_statement','malf.py',129),
 ]

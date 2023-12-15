@@ -1,6 +1,6 @@
 import ply.lex as lex
 import ply.yacc as yacc
-
+variables = {}
 # Definición de tokens
 tokens = (
     'read',
@@ -19,7 +19,8 @@ tokens = (
     'SEMICOLON',
     'ENTER',
     'parentesis_izq',
-    'parentesis_der'
+    'parentesis_der',
+    'EQUALS'
 )
 
 # Expresiones regulares para tokens simples
@@ -28,6 +29,7 @@ t_ignore = ' \t'
 t_parentesis_izq = r'\('
 t_parentesis_der = r'\)'
 t_ENTER = r'\n'
+t_EQUALS = r'='  # Expresión regular para la asignación
 # tokens simples
 t_read = r'read'
 t_write = r'write'
@@ -78,8 +80,15 @@ def p_statement(p):
               | if_statement
               | while_statement
               | write_statement
+              | assignment_statement
     '''
     pass
+
+def p_assignment_statement(p):
+    'assignment_statement : ID EQUALS expression SEMICOLON'
+    variables[p[1]] = p[3]
+    p[0] = f"Assignment to : {p[1]} = {p[3]}"
+    print(p[0])
 
 def p_read_statement(p):
     'read_statement : read ID SEMICOLON'
@@ -94,12 +103,6 @@ def p_if_statement(p):
     '''
     pass
 
-
-#def p_else_statement(p):
-#    '''
-#    else_statement : else ENTER statement_list
-#    '''
-#    pass
 def p_condition(p):
     'condition : BOOL'
     print(f"Condition: {p[1]}")
@@ -121,7 +124,9 @@ def p_expression(p):
                | NUM
                | operando_statement
     '''
+    p[0] = p[1]
     pass
+
 def p_operando_statement(p):
     '''
     operando_statement : expression OPERATOR expression    
@@ -140,14 +145,8 @@ lexer = lex.lex()
 parser = yacc.yacc()
 lexer = lex.lex()
 
-codigo = """write $num1;
-if ($num1 < 10) then
-    write $num1;
-else
-    write $num1;
-endif;"""
+codigo = """$num1 = 5;
+$num1 = 6;"""
 
 result = parser.parse(codigo, lexer=lexer)
-
-
-
+print("Variables después de la ejecución:", variables)

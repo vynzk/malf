@@ -11,50 +11,54 @@ Rule 5     statement -> read_statement
 Rule 6     statement -> if_statement
 Rule 7     statement -> while_statement
 Rule 8     statement -> write_statement
-Rule 9     read_statement -> read ID SEMICOLON
-Rule 10    if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-Rule 11    if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-Rule 12    if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-Rule 13    if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-Rule 14    condition -> BOOL
-Rule 15    while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-Rule 16    while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-Rule 17    write_statement -> write expression SEMICOLON
-Rule 18    expression -> ID
-Rule 19    expression -> NUM
-Rule 20    expression -> operando_statement
-Rule 21    operando_statement -> expression OPERATOR expression
+Rule 9     statement -> assignment_statement
+Rule 10    assignment_statement -> ID EQUALS expression SEMICOLON
+Rule 11    read_statement -> read ID SEMICOLON
+Rule 12    if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+Rule 13    if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+Rule 14    if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+Rule 15    if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+Rule 16    condition -> BOOL
+Rule 17    while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+Rule 18    while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+Rule 19    write_statement -> write expression SEMICOLON
+Rule 20    expression -> ID
+Rule 21    expression -> NUM
+Rule 22    expression -> operando_statement
+Rule 23    operando_statement -> expression OPERATOR expression
 
 Terminals, with rules where they appear
 
-BOOL                 : 14
-ENTER                : 1 2 10 11 11 12 13 13 15 16
-ID                   : 9 18
-NUM                  : 19
-OPERATOR             : 21
-SEMICOLON            : 9 10 11 12 13 15 16 17
-do                   : 15 16
-else                 : 11 13
-endif                : 10 11 12 13
+BOOL                 : 16
+ENTER                : 1 2 12 13 13 14 15 15 17 18
+EQUALS               : 10
+ID                   : 10 11 20
+NUM                  : 21
+OPERATOR             : 23
+SEMICOLON            : 10 11 12 13 14 15 17 18 19
+do                   : 17 18
+else                 : 13 15
+endif                : 12 13 14 15
 error                : 
-if                   : 10 11 12 13
-parentesis_der       : 10 11 12 13 15 16
-parentesis_izq       : 10 11 12 13 15 16
-read                 : 9
-then                 : 10 11 12 13
-wend                 : 15 16
-while                : 15 16
-write                : 17
+if                   : 12 13 14 15
+parentesis_der       : 12 13 14 15 17 18
+parentesis_izq       : 12 13 14 15 17 18
+read                 : 11
+then                 : 12 13 14 15
+wend                 : 17 18
+while                : 17 18
+write                : 19
 
 Nonterminals, with rules where they appear
 
-condition            : 10 11 15
-expression           : 17 21 21
+assignment_statement : 9
+condition            : 12 13 17
+expression           : 10 19 23 23
 if_statement         : 6
-operando_statement   : 12 13 16 20
+operando_statement   : 14 15 18 22
 read_statement       : 5
 statement            : 1 2 3 4
-statement_list       : 1 3 10 11 11 12 13 13 15 16 0
+statement_list       : 1 3 12 13 13 14 15 15 17 18 0
 while_statement      : 7
 write_statement      : 8
 
@@ -71,19 +75,22 @@ state 0
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
     statement_list                 shift and go to state 1
     statement                      shift and go to state 2
@@ -91,6 +98,7 @@ state 0
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 1
 
@@ -101,36 +109,41 @@ state 1
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement                      shift and go to state 11
+    statement                      shift and go to state 13
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 2
 
     (2) statement_list -> statement . ENTER
     (4) statement_list -> statement .
 
-    ENTER           shift and go to state 12
+    ENTER           shift and go to state 14
     read            reduce using rule 4 (statement_list -> statement .)
     if              reduce using rule 4 (statement_list -> statement .)
     while           reduce using rule 4 (statement_list -> statement .)
     write           reduce using rule 4 (statement_list -> statement .)
+    ID              reduce using rule 4 (statement_list -> statement .)
     $end            reduce using rule 4 (statement_list -> statement .)
     endif           reduce using rule 4 (statement_list -> statement .)
     else            reduce using rule 4 (statement_list -> statement .)
@@ -146,6 +159,7 @@ state 3
     if              reduce using rule 5 (statement -> read_statement .)
     while           reduce using rule 5 (statement -> read_statement .)
     write           reduce using rule 5 (statement -> read_statement .)
+    ID              reduce using rule 5 (statement -> read_statement .)
     $end            reduce using rule 5 (statement -> read_statement .)
     endif           reduce using rule 5 (statement -> read_statement .)
     else            reduce using rule 5 (statement -> read_statement .)
@@ -161,6 +175,7 @@ state 4
     if              reduce using rule 6 (statement -> if_statement .)
     while           reduce using rule 6 (statement -> if_statement .)
     write           reduce using rule 6 (statement -> if_statement .)
+    ID              reduce using rule 6 (statement -> if_statement .)
     $end            reduce using rule 6 (statement -> if_statement .)
     endif           reduce using rule 6 (statement -> if_statement .)
     else            reduce using rule 6 (statement -> if_statement .)
@@ -176,6 +191,7 @@ state 5
     if              reduce using rule 7 (statement -> while_statement .)
     while           reduce using rule 7 (statement -> while_statement .)
     write           reduce using rule 7 (statement -> while_statement .)
+    ID              reduce using rule 7 (statement -> while_statement .)
     $end            reduce using rule 7 (statement -> while_statement .)
     endif           reduce using rule 7 (statement -> while_statement .)
     else            reduce using rule 7 (statement -> while_statement .)
@@ -191,6 +207,7 @@ state 6
     if              reduce using rule 8 (statement -> write_statement .)
     while           reduce using rule 8 (statement -> write_statement .)
     write           reduce using rule 8 (statement -> write_statement .)
+    ID              reduce using rule 8 (statement -> write_statement .)
     $end            reduce using rule 8 (statement -> write_statement .)
     endif           reduce using rule 8 (statement -> write_statement .)
     else            reduce using rule 8 (statement -> write_statement .)
@@ -199,60 +216,84 @@ state 6
 
 state 7
 
-    (9) read_statement -> read . ID SEMICOLON
+    (9) statement -> assignment_statement .
 
-    ID              shift and go to state 13
+    ENTER           reduce using rule 9 (statement -> assignment_statement .)
+    read            reduce using rule 9 (statement -> assignment_statement .)
+    if              reduce using rule 9 (statement -> assignment_statement .)
+    while           reduce using rule 9 (statement -> assignment_statement .)
+    write           reduce using rule 9 (statement -> assignment_statement .)
+    ID              reduce using rule 9 (statement -> assignment_statement .)
+    $end            reduce using rule 9 (statement -> assignment_statement .)
+    endif           reduce using rule 9 (statement -> assignment_statement .)
+    else            reduce using rule 9 (statement -> assignment_statement .)
+    wend            reduce using rule 9 (statement -> assignment_statement .)
 
 
 state 8
 
-    (10) if_statement -> if . parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> if . parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> if . parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> if . parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (11) read_statement -> read . ID SEMICOLON
 
-    parentesis_izq  shift and go to state 14
+    ID              shift and go to state 15
 
 
 state 9
 
-    (15) while_statement -> while . parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> while . parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (10) assignment_statement -> ID . EQUALS expression SEMICOLON
 
-    parentesis_izq  shift and go to state 15
+    EQUALS          shift and go to state 16
 
 
 state 10
 
-    (17) write_statement -> write . expression SEMICOLON
-    (18) expression -> . ID
-    (19) expression -> . NUM
-    (20) expression -> . operando_statement
-    (21) operando_statement -> . expression OPERATOR expression
+    (12) if_statement -> if . parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> if . parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> if . parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> if . parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    ID              shift and go to state 17
-    NUM             shift and go to state 18
+    parentesis_izq  shift and go to state 17
 
-    expression                     shift and go to state 16
-    operando_statement             shift and go to state 19
 
 state 11
+
+    (17) while_statement -> while . parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> while . parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+
+    parentesis_izq  shift and go to state 18
+
+
+state 12
+
+    (19) write_statement -> write . expression SEMICOLON
+    (20) expression -> . ID
+    (21) expression -> . NUM
+    (22) expression -> . operando_statement
+    (23) operando_statement -> . expression OPERATOR expression
+
+    ID              shift and go to state 20
+    NUM             shift and go to state 21
+
+    expression                     shift and go to state 19
+    operando_statement             shift and go to state 22
+
+state 13
 
     (1) statement_list -> statement_list statement . ENTER
     (3) statement_list -> statement_list statement .
 
-    ENTER           shift and go to state 20
+    ENTER           shift and go to state 23
     read            reduce using rule 3 (statement_list -> statement_list statement .)
     if              reduce using rule 3 (statement_list -> statement_list statement .)
     while           reduce using rule 3 (statement_list -> statement_list statement .)
     write           reduce using rule 3 (statement_list -> statement_list statement .)
+    ID              reduce using rule 3 (statement_list -> statement_list statement .)
     $end            reduce using rule 3 (statement_list -> statement_list statement .)
     endif           reduce using rule 3 (statement_list -> statement_list statement .)
     else            reduce using rule 3 (statement_list -> statement_list statement .)
     wend            reduce using rule 3 (statement_list -> statement_list statement .)
 
 
-state 12
+state 14
 
     (2) statement_list -> statement ENTER .
 
@@ -260,94 +301,109 @@ state 12
     if              reduce using rule 2 (statement_list -> statement ENTER .)
     while           reduce using rule 2 (statement_list -> statement ENTER .)
     write           reduce using rule 2 (statement_list -> statement ENTER .)
+    ID              reduce using rule 2 (statement_list -> statement ENTER .)
     $end            reduce using rule 2 (statement_list -> statement ENTER .)
     endif           reduce using rule 2 (statement_list -> statement ENTER .)
     else            reduce using rule 2 (statement_list -> statement ENTER .)
     wend            reduce using rule 2 (statement_list -> statement ENTER .)
 
 
-state 13
-
-    (9) read_statement -> read ID . SEMICOLON
-
-    SEMICOLON       shift and go to state 21
-
-
-state 14
-
-    (10) if_statement -> if parentesis_izq . condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> if parentesis_izq . condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> if parentesis_izq . operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> if parentesis_izq . operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (14) condition -> . BOOL
-    (21) operando_statement -> . expression OPERATOR expression
-    (18) expression -> . ID
-    (19) expression -> . NUM
-    (20) expression -> . operando_statement
-
-    BOOL            shift and go to state 24
-    ID              shift and go to state 17
-    NUM             shift and go to state 18
-
-    condition                      shift and go to state 22
-    operando_statement             shift and go to state 23
-    expression                     shift and go to state 25
-
 state 15
 
-    (15) while_statement -> while parentesis_izq . condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> while parentesis_izq . operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (14) condition -> . BOOL
-    (21) operando_statement -> . expression OPERATOR expression
-    (18) expression -> . ID
-    (19) expression -> . NUM
-    (20) expression -> . operando_statement
+    (11) read_statement -> read ID . SEMICOLON
 
-    BOOL            shift and go to state 24
-    ID              shift and go to state 17
-    NUM             shift and go to state 18
+    SEMICOLON       shift and go to state 24
 
-    condition                      shift and go to state 26
-    operando_statement             shift and go to state 27
-    expression                     shift and go to state 25
 
 state 16
 
-    (17) write_statement -> write expression . SEMICOLON
-    (21) operando_statement -> expression . OPERATOR expression
+    (10) assignment_statement -> ID EQUALS . expression SEMICOLON
+    (20) expression -> . ID
+    (21) expression -> . NUM
+    (22) expression -> . operando_statement
+    (23) operando_statement -> . expression OPERATOR expression
 
-    SEMICOLON       shift and go to state 28
-    OPERATOR        shift and go to state 29
+    ID              shift and go to state 20
+    NUM             shift and go to state 21
 
+    expression                     shift and go to state 25
+    operando_statement             shift and go to state 22
 
 state 17
 
-    (18) expression -> ID .
+    (12) if_statement -> if parentesis_izq . condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> if parentesis_izq . condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> if parentesis_izq . operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> if parentesis_izq . operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (16) condition -> . BOOL
+    (23) operando_statement -> . expression OPERATOR expression
+    (20) expression -> . ID
+    (21) expression -> . NUM
+    (22) expression -> . operando_statement
 
-    SEMICOLON       reduce using rule 18 (expression -> ID .)
-    OPERATOR        reduce using rule 18 (expression -> ID .)
-    parentesis_der  reduce using rule 18 (expression -> ID .)
+    BOOL            shift and go to state 28
+    ID              shift and go to state 20
+    NUM             shift and go to state 21
 
+    condition                      shift and go to state 26
+    operando_statement             shift and go to state 27
+    expression                     shift and go to state 29
 
 state 18
 
-    (19) expression -> NUM .
+    (17) while_statement -> while parentesis_izq . condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> while parentesis_izq . operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (16) condition -> . BOOL
+    (23) operando_statement -> . expression OPERATOR expression
+    (20) expression -> . ID
+    (21) expression -> . NUM
+    (22) expression -> . operando_statement
 
-    SEMICOLON       reduce using rule 19 (expression -> NUM .)
-    OPERATOR        reduce using rule 19 (expression -> NUM .)
-    parentesis_der  reduce using rule 19 (expression -> NUM .)
+    BOOL            shift and go to state 28
+    ID              shift and go to state 20
+    NUM             shift and go to state 21
 
+    condition                      shift and go to state 30
+    operando_statement             shift and go to state 31
+    expression                     shift and go to state 29
 
 state 19
 
-    (20) expression -> operando_statement .
+    (19) write_statement -> write expression . SEMICOLON
+    (23) operando_statement -> expression . OPERATOR expression
 
-    SEMICOLON       reduce using rule 20 (expression -> operando_statement .)
-    OPERATOR        reduce using rule 20 (expression -> operando_statement .)
-    parentesis_der  reduce using rule 20 (expression -> operando_statement .)
+    SEMICOLON       shift and go to state 32
+    OPERATOR        shift and go to state 33
 
 
 state 20
+
+    (20) expression -> ID .
+
+    SEMICOLON       reduce using rule 20 (expression -> ID .)
+    OPERATOR        reduce using rule 20 (expression -> ID .)
+    parentesis_der  reduce using rule 20 (expression -> ID .)
+
+
+state 21
+
+    (21) expression -> NUM .
+
+    SEMICOLON       reduce using rule 21 (expression -> NUM .)
+    OPERATOR        reduce using rule 21 (expression -> NUM .)
+    parentesis_der  reduce using rule 21 (expression -> NUM .)
+
+
+state 22
+
+    (22) expression -> operando_statement .
+
+    SEMICOLON       reduce using rule 22 (expression -> operando_statement .)
+    OPERATOR        reduce using rule 22 (expression -> operando_statement .)
+    parentesis_der  reduce using rule 22 (expression -> operando_statement .)
+
+
+state 23
 
     (1) statement_list -> statement_list statement ENTER .
 
@@ -355,278 +411,209 @@ state 20
     if              reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     while           reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     write           reduce using rule 1 (statement_list -> statement_list statement ENTER .)
+    ID              reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     $end            reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     endif           reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     else            reduce using rule 1 (statement_list -> statement_list statement ENTER .)
     wend            reduce using rule 1 (statement_list -> statement_list statement ENTER .)
 
 
-state 21
-
-    (9) read_statement -> read ID SEMICOLON .
-
-    ENTER           reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    read            reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    if              reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    while           reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    write           reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    $end            reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    endif           reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    else            reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-    wend            reduce using rule 9 (read_statement -> read ID SEMICOLON .)
-
-
-state 22
-
-    (10) if_statement -> if parentesis_izq condition . parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> if parentesis_izq condition . parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-
-    parentesis_der  shift and go to state 30
-
-
-state 23
-
-    (12) if_statement -> if parentesis_izq operando_statement . parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> if parentesis_izq operando_statement . parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (20) expression -> operando_statement .
-
-    parentesis_der  shift and go to state 31
-    OPERATOR        reduce using rule 20 (expression -> operando_statement .)
-
-
 state 24
 
-    (14) condition -> BOOL .
+    (11) read_statement -> read ID SEMICOLON .
 
-    parentesis_der  reduce using rule 14 (condition -> BOOL .)
+    ENTER           reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    read            reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    if              reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    while           reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    write           reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    ID              reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    $end            reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    endif           reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    else            reduce using rule 11 (read_statement -> read ID SEMICOLON .)
+    wend            reduce using rule 11 (read_statement -> read ID SEMICOLON .)
 
 
 state 25
 
-    (21) operando_statement -> expression . OPERATOR expression
+    (10) assignment_statement -> ID EQUALS expression . SEMICOLON
+    (23) operando_statement -> expression . OPERATOR expression
 
-    OPERATOR        shift and go to state 29
+    SEMICOLON       shift and go to state 34
+    OPERATOR        shift and go to state 33
 
 
 state 26
 
-    (15) while_statement -> while parentesis_izq condition . parentesis_der do ENTER statement_list wend SEMICOLON
+    (12) if_statement -> if parentesis_izq condition . parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> if parentesis_izq condition . parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    parentesis_der  shift and go to state 32
+    parentesis_der  shift and go to state 35
 
 
 state 27
 
-    (16) while_statement -> while parentesis_izq operando_statement . parentesis_der do ENTER statement_list wend SEMICOLON
-    (20) expression -> operando_statement .
+    (14) if_statement -> if parentesis_izq operando_statement . parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> if parentesis_izq operando_statement . parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (22) expression -> operando_statement .
 
-    parentesis_der  shift and go to state 33
-    OPERATOR        reduce using rule 20 (expression -> operando_statement .)
+    parentesis_der  shift and go to state 36
+    OPERATOR        reduce using rule 22 (expression -> operando_statement .)
 
 
 state 28
 
-    (17) write_statement -> write expression SEMICOLON .
+    (16) condition -> BOOL .
 
-    ENTER           reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    read            reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    if              reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    while           reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    write           reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    $end            reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    endif           reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    else            reduce using rule 17 (write_statement -> write expression SEMICOLON .)
-    wend            reduce using rule 17 (write_statement -> write expression SEMICOLON .)
+    parentesis_der  reduce using rule 16 (condition -> BOOL .)
 
 
 state 29
 
-    (21) operando_statement -> expression OPERATOR . expression
-    (18) expression -> . ID
-    (19) expression -> . NUM
-    (20) expression -> . operando_statement
-    (21) operando_statement -> . expression OPERATOR expression
+    (23) operando_statement -> expression . OPERATOR expression
 
-    ID              shift and go to state 17
-    NUM             shift and go to state 18
+    OPERATOR        shift and go to state 33
 
-    expression                     shift and go to state 34
-    operando_statement             shift and go to state 19
 
 state 30
 
-    (10) if_statement -> if parentesis_izq condition parentesis_der . then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> if parentesis_izq condition parentesis_der . then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> while parentesis_izq condition . parentesis_der do ENTER statement_list wend SEMICOLON
 
-    then            shift and go to state 35
+    parentesis_der  shift and go to state 37
 
 
 state 31
 
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der . then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der . then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (18) while_statement -> while parentesis_izq operando_statement . parentesis_der do ENTER statement_list wend SEMICOLON
+    (22) expression -> operando_statement .
 
-    then            shift and go to state 36
+    parentesis_der  shift and go to state 38
+    OPERATOR        reduce using rule 22 (expression -> operando_statement .)
 
 
 state 32
 
-    (15) while_statement -> while parentesis_izq condition parentesis_der . do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> write expression SEMICOLON .
 
-    do              shift and go to state 37
+    ENTER           reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    read            reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    if              reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    while           reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    write           reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    ID              reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    $end            reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    endif           reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    else            reduce using rule 19 (write_statement -> write expression SEMICOLON .)
+    wend            reduce using rule 19 (write_statement -> write expression SEMICOLON .)
 
 
 state 33
 
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der . do ENTER statement_list wend SEMICOLON
+    (23) operando_statement -> expression OPERATOR . expression
+    (20) expression -> . ID
+    (21) expression -> . NUM
+    (22) expression -> . operando_statement
+    (23) operando_statement -> . expression OPERATOR expression
 
-    do              shift and go to state 38
+    ID              shift and go to state 20
+    NUM             shift and go to state 21
 
+    expression                     shift and go to state 39
+    operando_statement             shift and go to state 22
 
 state 34
 
-    (21) operando_statement -> expression OPERATOR expression .
-    (21) operando_statement -> expression . OPERATOR expression
+    (10) assignment_statement -> ID EQUALS expression SEMICOLON .
 
-  ! shift/reduce conflict for OPERATOR resolved as shift
-    SEMICOLON       reduce using rule 21 (operando_statement -> expression OPERATOR expression .)
-    parentesis_der  reduce using rule 21 (operando_statement -> expression OPERATOR expression .)
-    OPERATOR        shift and go to state 29
-
-  ! OPERATOR        [ reduce using rule 21 (operando_statement -> expression OPERATOR expression .) ]
+    ENTER           reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    read            reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    if              reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    while           reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    write           reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    ID              reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    $end            reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    endif           reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    else            reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
+    wend            reduce using rule 10 (assignment_statement -> ID EQUALS expression SEMICOLON .)
 
 
 state 35
 
-    (10) if_statement -> if parentesis_izq condition parentesis_der then . ENTER statement_list endif SEMICOLON
-    (11) if_statement -> if parentesis_izq condition parentesis_der then . ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (12) if_statement -> if parentesis_izq condition parentesis_der . then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> if parentesis_izq condition parentesis_der . then ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    ENTER           shift and go to state 39
+    then            shift and go to state 40
 
 
 state 36
 
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der then . ENTER statement_list endif SEMICOLON
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then . ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der . then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der . then ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    ENTER           shift and go to state 40
+    then            shift and go to state 41
 
 
 state 37
 
-    (15) while_statement -> while parentesis_izq condition parentesis_der do . ENTER statement_list wend SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der . do ENTER statement_list wend SEMICOLON
 
-    ENTER           shift and go to state 41
+    do              shift and go to state 42
 
 
 state 38
 
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der do . ENTER statement_list wend SEMICOLON
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der . do ENTER statement_list wend SEMICOLON
 
-    ENTER           shift and go to state 42
+    do              shift and go to state 43
 
 
 state 39
 
-    (10) if_statement -> if parentesis_izq condition parentesis_der then ENTER . statement_list endif SEMICOLON
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER . statement_list else ENTER statement_list endif SEMICOLON
-    (1) statement_list -> . statement_list statement ENTER
-    (2) statement_list -> . statement ENTER
-    (3) statement_list -> . statement_list statement
-    (4) statement_list -> . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (23) operando_statement -> expression OPERATOR expression .
+    (23) operando_statement -> expression . OPERATOR expression
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+  ! shift/reduce conflict for OPERATOR resolved as shift
+    SEMICOLON       reduce using rule 23 (operando_statement -> expression OPERATOR expression .)
+    parentesis_der  reduce using rule 23 (operando_statement -> expression OPERATOR expression .)
+    OPERATOR        shift and go to state 33
 
-    statement_list                 shift and go to state 43
-    statement                      shift and go to state 2
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
+  ! OPERATOR        [ reduce using rule 23 (operando_statement -> expression OPERATOR expression .) ]
+
 
 state 40
 
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER . statement_list endif SEMICOLON
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER . statement_list else ENTER statement_list endif SEMICOLON
-    (1) statement_list -> . statement_list statement ENTER
-    (2) statement_list -> . statement ENTER
-    (3) statement_list -> . statement_list statement
-    (4) statement_list -> . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (12) if_statement -> if parentesis_izq condition parentesis_der then . ENTER statement_list endif SEMICOLON
+    (13) if_statement -> if parentesis_izq condition parentesis_der then . ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    ENTER           shift and go to state 44
 
-    statement_list                 shift and go to state 44
-    statement                      shift and go to state 2
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
 
 state 41
 
-    (15) while_statement -> while parentesis_izq condition parentesis_der do ENTER . statement_list wend SEMICOLON
-    (1) statement_list -> . statement_list statement ENTER
-    (2) statement_list -> . statement ENTER
-    (3) statement_list -> . statement_list statement
-    (4) statement_list -> . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der then . ENTER statement_list endif SEMICOLON
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then . ENTER statement_list else ENTER statement_list endif SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    ENTER           shift and go to state 45
 
-    statement_list                 shift and go to state 45
-    statement                      shift and go to state 2
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
 
 state 42
 
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER . statement_list wend SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der do . ENTER statement_list wend SEMICOLON
+
+    ENTER           shift and go to state 46
+
+
+state 43
+
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der do . ENTER statement_list wend SEMICOLON
+
+    ENTER           shift and go to state 47
+
+
+state 44
+
+    (12) if_statement -> if parentesis_izq condition parentesis_der then ENTER . statement_list endif SEMICOLON
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER . statement_list else ENTER statement_list endif SEMICOLON
     (1) statement_list -> . statement_list statement ENTER
     (2) statement_list -> . statement ENTER
     (3) statement_list -> . statement_list statement
@@ -635,258 +622,341 @@ state 42
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement_list                 shift and go to state 46
+    statement_list                 shift and go to state 48
     statement                      shift and go to state 2
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
-
-state 43
-
-    (10) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list . endif SEMICOLON
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list . else ENTER statement_list endif SEMICOLON
-    (1) statement_list -> statement_list . statement ENTER
-    (3) statement_list -> statement_list . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
-
-    endif           shift and go to state 47
-    else            shift and go to state 48
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
-
-    statement                      shift and go to state 11
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
-
-state 44
-
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list . endif SEMICOLON
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list . else ENTER statement_list endif SEMICOLON
-    (1) statement_list -> statement_list . statement ENTER
-    (3) statement_list -> statement_list . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
-
-    endif           shift and go to state 49
-    else            shift and go to state 50
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
-
-    statement                      shift and go to state 11
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 45
 
-    (15) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list . wend SEMICOLON
-    (1) statement_list -> statement_list . statement ENTER
-    (3) statement_list -> statement_list . statement
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER . statement_list endif SEMICOLON
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER . statement_list else ENTER statement_list endif SEMICOLON
+    (1) statement_list -> . statement_list statement ENTER
+    (2) statement_list -> . statement ENTER
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement
     (5) statement -> . read_statement
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    wend            shift and go to state 51
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement                      shift and go to state 11
+    statement_list                 shift and go to state 49
+    statement                      shift and go to state 2
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 46
 
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list . wend SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der do ENTER . statement_list wend SEMICOLON
+    (1) statement_list -> . statement_list statement ENTER
+    (2) statement_list -> . statement ENTER
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
+
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 50
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 47
+
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER . statement_list wend SEMICOLON
+    (1) statement_list -> . statement_list statement ENTER
+    (2) statement_list -> . statement ENTER
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
+
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 51
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 48
+
+    (12) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list . endif SEMICOLON
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list . else ENTER statement_list endif SEMICOLON
     (1) statement_list -> statement_list . statement ENTER
     (3) statement_list -> statement_list . statement
     (5) statement -> . read_statement
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    wend            shift and go to state 52
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    endif           shift and go to state 52
+    else            shift and go to state 53
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement                      shift and go to state 11
+    statement                      shift and go to state 13
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
-
-state 47
-
-    (10) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif . SEMICOLON
-
-    SEMICOLON       shift and go to state 53
-
-
-state 48
-
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else . ENTER statement_list endif SEMICOLON
-
-    ENTER           shift and go to state 54
-
+    assignment_statement           shift and go to state 7
 
 state 49
 
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif . SEMICOLON
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list . endif SEMICOLON
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list . else ENTER statement_list endif SEMICOLON
+    (1) statement_list -> statement_list . statement ENTER
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    SEMICOLON       shift and go to state 55
+    endif           shift and go to state 54
+    else            shift and go to state 55
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
+    statement                      shift and go to state 13
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 50
 
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else . ENTER statement_list endif SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list . wend SEMICOLON
+    (1) statement_list -> statement_list . statement ENTER
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    ENTER           shift and go to state 56
+    wend            shift and go to state 56
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
+    statement                      shift and go to state 13
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 51
 
-    (15) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend . SEMICOLON
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list . wend SEMICOLON
+    (1) statement_list -> statement_list . statement ENTER
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    SEMICOLON       shift and go to state 57
+    wend            shift and go to state 57
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
+    statement                      shift and go to state 13
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 52
 
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend . SEMICOLON
+    (12) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif . SEMICOLON
 
     SEMICOLON       shift and go to state 58
 
 
 state 53
 
-    (10) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else . ENTER statement_list endif SEMICOLON
 
-    ENTER           reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    read            reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    if              reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    while           reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    write           reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    $end            reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    endif           reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    else            reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
-    wend            reduce using rule 10 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    ENTER           shift and go to state 59
 
 
 state 54
 
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER . statement_list endif SEMICOLON
-    (1) statement_list -> . statement_list statement ENTER
-    (2) statement_list -> . statement ENTER
-    (3) statement_list -> . statement_list statement
-    (4) statement_list -> . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif . SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    SEMICOLON       shift and go to state 60
 
-    statement_list                 shift and go to state 59
-    statement                      shift and go to state 2
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
 
 state 55
 
-    (12) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else . ENTER statement_list endif SEMICOLON
 
-    ENTER           reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    read            reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    if              reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    while           reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    write           reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    $end            reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    endif           reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    else            reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
-    wend            reduce using rule 12 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    ENTER           shift and go to state 61
 
 
 state 56
 
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER . statement_list endif SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend . SEMICOLON
+
+    SEMICOLON       shift and go to state 62
+
+
+state 57
+
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend . SEMICOLON
+
+    SEMICOLON       shift and go to state 63
+
+
+state 58
+
+    (12) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .
+
+    ENTER           reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    read            reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    if              reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    while           reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    write           reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    ID              reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    $end            reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    endif           reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    else            reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+    wend            reduce using rule 12 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON .)
+
+
+state 59
+
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER . statement_list endif SEMICOLON
     (1) statement_list -> . statement_list statement ENTER
     (2) statement_list -> . statement ENTER
     (3) statement_list -> . statement_list statement
@@ -895,161 +965,229 @@ state 56
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement_list                 shift and go to state 60
+    statement_list                 shift and go to state 64
     statement                      shift and go to state 2
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
-
-state 57
-
-    (15) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .
-
-    ENTER           reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    read            reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    if              reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    while           reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    write           reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    $end            reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    endif           reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    else            reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-    wend            reduce using rule 15 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
-
-
-state 58
-
-    (16) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .
-
-    ENTER           reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    read            reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    if              reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    while           reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    write           reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    $end            reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    endif           reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    else            reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-    wend            reduce using rule 16 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
-
-
-state 59
-
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list . endif SEMICOLON
-    (1) statement_list -> statement_list . statement ENTER
-    (3) statement_list -> statement_list . statement
-    (5) statement -> . read_statement
-    (6) statement -> . if_statement
-    (7) statement -> . while_statement
-    (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
-
-    endif           shift and go to state 61
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
-
-    statement                      shift and go to state 11
-    read_statement                 shift and go to state 3
-    if_statement                   shift and go to state 4
-    while_statement                shift and go to state 5
-    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
 
 state 60
 
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list . endif SEMICOLON
-    (1) statement_list -> statement_list . statement ENTER
-    (3) statement_list -> statement_list . statement
+    (14) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .
+
+    ENTER           reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    read            reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    if              reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    while           reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    write           reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    ID              reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    $end            reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    endif           reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    else            reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+    wend            reduce using rule 14 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON .)
+
+
+state 61
+
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER . statement_list endif SEMICOLON
+    (1) statement_list -> . statement_list statement ENTER
+    (2) statement_list -> . statement ENTER
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement
     (5) statement -> . read_statement
     (6) statement -> . if_statement
     (7) statement -> . while_statement
     (8) statement -> . write_statement
-    (9) read_statement -> . read ID SEMICOLON
-    (10) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
-    (11) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (12) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
-    (13) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
-    (15) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
-    (16) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
-    (17) write_statement -> . write expression SEMICOLON
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    endif           shift and go to state 62
-    read            shift and go to state 7
-    if              shift and go to state 8
-    while           shift and go to state 9
-    write           shift and go to state 10
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
 
-    statement                      shift and go to state 11
+    statement_list                 shift and go to state 65
+    statement                      shift and go to state 2
     read_statement                 shift and go to state 3
     if_statement                   shift and go to state 4
     while_statement                shift and go to state 5
     write_statement                shift and go to state 6
-
-state 61
-
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif . SEMICOLON
-
-    SEMICOLON       shift and go to state 63
-
+    assignment_statement           shift and go to state 7
 
 state 62
 
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif . SEMICOLON
+    (17) while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .
 
-    SEMICOLON       shift and go to state 64
+    ENTER           reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    read            reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    if              reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    while           reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    write           reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    ID              reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    $end            reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    endif           reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    else            reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
+    wend            reduce using rule 17 (while_statement -> while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON .)
 
 
 state 63
 
-    (11) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .
+    (18) while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .
 
-    ENTER           reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    read            reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    if              reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    while           reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    write           reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    $end            reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    endif           reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    else            reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    wend            reduce using rule 11 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    ENTER           reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    read            reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    if              reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    while           reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    write           reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    ID              reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    $end            reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    endif           reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    else            reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
+    wend            reduce using rule 18 (while_statement -> while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON .)
 
 
 state 64
 
-    (13) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list . endif SEMICOLON
+    (1) statement_list -> statement_list . statement ENTER
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
 
-    ENTER           reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    read            reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    if              reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    while           reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    write           reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    $end            reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    endif           reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    else            reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
-    wend            reduce using rule 13 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    endif           shift and go to state 66
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 13
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 65
+
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list . endif SEMICOLON
+    (1) statement_list -> statement_list . statement ENTER
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . read_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . write_statement
+    (9) statement -> . assignment_statement
+    (11) read_statement -> . read ID SEMICOLON
+    (12) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+    (13) if_statement -> . if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (14) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+    (15) if_statement -> . if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+    (17) while_statement -> . while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+    (18) while_statement -> . while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
+    (19) write_statement -> . write expression SEMICOLON
+    (10) assignment_statement -> . ID EQUALS expression SEMICOLON
+
+    endif           shift and go to state 67
+    read            shift and go to state 8
+    if              shift and go to state 10
+    while           shift and go to state 11
+    write           shift and go to state 12
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 13
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 66
+
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif . SEMICOLON
+
+    SEMICOLON       shift and go to state 68
+
+
+state 67
+
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif . SEMICOLON
+
+    SEMICOLON       shift and go to state 69
+
+
+state 68
+
+    (13) if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .
+
+    ENTER           reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    read            reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    if              reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    while           reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    write           reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    ID              reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    $end            reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    endif           reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    else            reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    wend            reduce using rule 13 (if_statement -> if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+
+
+state 69
+
+    (15) if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .
+
+    ENTER           reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    read            reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    if              reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    while           reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    write           reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    ID              reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    $end            reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    endif           reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    else            reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
+    wend            reduce using rule 15 (if_statement -> if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for OPERATOR in state 34 resolved as shift
+WARNING: shift/reduce conflict for OPERATOR in state 39 resolved as shift
