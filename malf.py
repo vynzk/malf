@@ -17,6 +17,7 @@ tokens = (
     'BOOL',
     'OPERATOR',
     'SEMICOLON',
+    'ENTER',
     'parentesis_izq',
     'parentesis_der'
 )
@@ -26,6 +27,7 @@ t_SEMICOLON = r';'
 t_ignore = ' \t'
 t_parentesis_izq = r'\('
 t_parentesis_der = r'\)'
+t_ENTER = r'\n'
 # tokens simples
 t_read = r'read'
 t_write = r'write'
@@ -83,14 +85,14 @@ def p_read_statement(p):
 
 def p_if_statement(p):
     '''
-    if_statement : if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
-                | if condition then statement_list else_statement endif SEMICOLON
+    if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list ENTER endif SEMICOLON
+                | if condition then ENTER statement_list ENTER else_statement ENTER endif SEMICOLON
     '''
     pass
 
 def p_else_statement(p):
     '''
-    else_statement : else statement_list
+    else_statement : else ENTER statement_list
             | 
     '''
     pass
@@ -99,7 +101,7 @@ def p_condition(p):
     print(f"Condition: {p[1]}")
 
 def p_while_statement(p):
-    'while_statement : while condition do statement_list wend SEMICOLON'
+    'while_statement : while condition do ENTER statement_list ENTER wend SEMICOLON'
     pass
 
 def p_write_statement(p):
@@ -124,27 +126,14 @@ def p_error(p):
 # Construcción del analizador léxico
 lexer = lex.lex()
 
-# Construcción del analizador sintáctico
 parser = yacc.yacc()
 
-# Ejemplo de entrada
-# Ejemplo de entrada sin saltos de línea al principio y al final
-# Construcción del analizador léxico
 lexer = lex.lex()
 
-# Ejemplo de entrada
-#codigo = """write 1 + 2;
-#write 3 * 4;"""
+codigo = """if (true) then 
+    write 1; 
+endif;"""
 
-# Ejecución del analizador léxico
-#lexer.input(codigo)
-#for token in lexer:
-#    print(token)
-
-codigo = """if (true) then write 1; endif;"""
-
-# Ejecución del analizador sintáctico
-#parser.parse(codigo)
 result = parser.parse(codigo, lexer=lexer)
 
 
