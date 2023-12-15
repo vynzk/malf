@@ -65,7 +65,9 @@ def t_error(t):
 # Definición de reglas sintácticas
 def p_statement_list(p):
     '''
-    statement_list : statement_list statement
+    statement_list : statement_list statement ENTER
+                   | statement ENTER
+                   | statement_list statement
                    | statement
     '''
     pass
@@ -85,12 +87,13 @@ def p_read_statement(p):
 
 def p_if_statement(p):
     '''
-    if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list ENTER endif SEMICOLON
-                | if parentesis_izq condition parentesis_der then ENTER statement_list ENTER else ENTER statement_list ENTER endif SEMICOLON
-                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list ENTER endif SEMICOLON
-                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list ENTER else ENTER statement_list ENTER endif SEMICOLON
+    if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list endif SEMICOLON
+                | if parentesis_izq condition parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
+                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list endif SEMICOLON
+                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list else ENTER statement_list endif SEMICOLON
     '''
     pass
+
 
 #def p_else_statement(p):
 #    '''
@@ -103,8 +106,8 @@ def p_condition(p):
 
 def p_while_statement(p):
     '''
-    while_statement : while parentesis_izq condition parentesis_der do ENTER statement_list ENTER wend SEMICOLON
-                    | while parentesis_izq operando_statement parentesis_der do ENTER statement_list ENTER wend SEMICOLON
+    while_statement : while parentesis_izq condition parentesis_der do ENTER statement_list wend SEMICOLON
+                    | while parentesis_izq operando_statement parentesis_der do ENTER statement_list wend SEMICOLON
     '''
     pass
 
@@ -137,10 +140,11 @@ lexer = lex.lex()
 parser = yacc.yacc()
 lexer = lex.lex()
 
-codigo = """if (1 < 2) then
-    write 2;
+codigo = """write $num1;
+if ($num1 < 10) then
+    write $num1;
 else
-    write 1;
+    write $num1;
 endif;"""
 
 result = parser.parse(codigo, lexer=lexer)
