@@ -19,7 +19,7 @@ tokens = (
     'SEMICOLON',
     'ENTER',
     'parentesis_izq',
-    'parentesis_der'
+    'parentesis_der',
 )
 
 # Expresiones regulares para tokens simples
@@ -87,6 +87,7 @@ def p_if_statement(p):
     '''
     if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list ENTER endif SEMICOLON
                 | if condition then ENTER statement_list ENTER else_statement ENTER endif SEMICOLON
+                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list ENTER endif SEMICOLON
     '''
     pass
 
@@ -101,7 +102,10 @@ def p_condition(p):
     print(f"Condition: {p[1]}")
 
 def p_while_statement(p):
-    'while_statement : while condition do ENTER statement_list ENTER wend SEMICOLON'
+    '''
+    while_statement : while parentesis_izq condition parentesis_der do ENTER statement_list ENTER wend SEMICOLON
+                    | while parentesis_izq operando_statement parentesis_der do ENTER statement_list ENTER wend SEMICOLON
+    '''
     pass
 
 def p_write_statement(p):
@@ -112,7 +116,12 @@ def p_expression(p):
     '''
     expression : ID
                | NUM
-               | expression OPERATOR expression
+               | operando_statement
+    '''
+    pass
+def p_operando_statement(p):
+    '''
+    operando_statement : expression OPERATOR expression    
     '''
     pass
 
@@ -125,12 +134,10 @@ def p_error(p):
 
 # Construcción del analizador léxico
 lexer = lex.lex()
-
 parser = yacc.yacc()
-
 lexer = lex.lex()
 
-codigo = """if (true) then 
+codigo = """if ( 2 < 3 ) then 
     write 1; 
 endif;"""
 
