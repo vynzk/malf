@@ -86,17 +86,17 @@ def p_read_statement(p):
 def p_if_statement(p):
     '''
     if_statement : if parentesis_izq condition parentesis_der then ENTER statement_list ENTER endif SEMICOLON
-                | if condition then ENTER statement_list ENTER else_statement ENTER endif SEMICOLON
+                | if parentesis_izq condition parentesis_der then ENTER statement_list ENTER else ENTER statement_list ENTER endif SEMICOLON
                 | if parentesis_izq operando_statement parentesis_der then ENTER statement_list ENTER endif SEMICOLON
+                | if parentesis_izq operando_statement parentesis_der then ENTER statement_list ENTER else ENTER statement_list ENTER endif SEMICOLON
     '''
     pass
 
-def p_else_statement(p):
-    '''
-    else_statement : else ENTER statement_list
-            | 
-    '''
-    pass
+#def p_else_statement(p):
+#    '''
+#    else_statement : else ENTER statement_list
+#    '''
+#    pass
 def p_condition(p):
     'condition : BOOL'
     print(f"Condition: {p[1]}")
@@ -137,8 +137,10 @@ lexer = lex.lex()
 parser = yacc.yacc()
 lexer = lex.lex()
 
-codigo = """if ( 2 < 3 ) then 
-    write 1; 
+codigo = """if (1 < 2) then
+    write 2;
+else
+    write 1;
 endif;"""
 
 result = parser.parse(codigo, lexer=lexer)
