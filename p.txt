@@ -1,0 +1,43 @@
+read $n;
+if ($n < 2) then
+    write $n;
+else
+    $fib1 = 1;
+    $fib2 = 0;
+    $i = 2;
+    while ($i <= $n) do
+        $act = $fib1 + $fib2;
+        $fib2 = $fib1;
+        $fib1 = $act;
+        $i = $i + 1;
+    wend;
+write $act;
+endif;
+
+
+Necesito hacer un interprete para un lenguaje inventado usando python y ply
+con las siguientes reglas:
+1. if (booleano) then
+    ...codigo
+   endif
+2. if (booleao) then
+    ...codigo
+   elseif
+    ...codigo
+   elseif
+    ...codigo
+   y mas elseif
+   endif
+3. while (booleano) do
+    ...codigo
+   wend
+4. write ...codigo
+5. ...codigo es igual a booleano o a operacion
+6. booleano es igual a "valor condicion valor"
+7. operacion
+8. valor es igual a un numero entero
+9. $n es igual a un numero entero
+
+   
+codigo = """write 1 + 2;
+write 3 * 4;"""

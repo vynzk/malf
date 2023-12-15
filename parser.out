@@ -1,0 +1,651 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement_list
+Rule 1     statement_list -> statement_list statement
+Rule 2     statement_list -> statement
+Rule 3     statement -> read_statement
+Rule 4     statement -> if_statement
+Rule 5     statement -> while_statement
+Rule 6     statement -> write_statement
+Rule 7     read_statement -> read ID SEMICOLON
+Rule 8     if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+Rule 9     if_statement -> if condition then statement_list else_statement endif SEMICOLON
+Rule 10    else_statement -> else statement_list
+Rule 11    else_statement -> <empty>
+Rule 12    condition -> BOOL
+Rule 13    while_statement -> while condition do statement_list wend SEMICOLON
+Rule 14    write_statement -> write expression SEMICOLON
+Rule 15    expression -> ID
+Rule 16    expression -> NUM
+Rule 17    expression -> expression OPERATOR expression
+
+Terminals, with rules where they appear
+
+BOOL                 : 12
+ID                   : 7 15
+NUM                  : 16
+OPERATOR             : 17
+SEMICOLON            : 7 8 9 13 14
+do                   : 13
+else                 : 10
+endif                : 8 9
+error                : 
+if                   : 8 9
+parentesis_der       : 8
+parentesis_izq       : 8
+read                 : 7
+then                 : 8 9
+wend                 : 13
+while                : 13
+write                : 14
+
+Nonterminals, with rules where they appear
+
+condition            : 8 9 13
+else_statement       : 9
+expression           : 14 17 17
+if_statement         : 4
+read_statement       : 3
+statement            : 1 2
+statement_list       : 1 8 9 10 13 0
+while_statement      : 5
+write_statement      : 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement_list
+    (1) statement_list -> . statement_list statement
+    (2) statement_list -> . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement_list                 shift and go to state 1
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 1
+
+    (0) S' -> statement_list .
+    (1) statement_list -> statement_list . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement                      shift and go to state 11
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 2
+
+    (2) statement_list -> statement .
+
+    read            reduce using rule 2 (statement_list -> statement .)
+    if              reduce using rule 2 (statement_list -> statement .)
+    while           reduce using rule 2 (statement_list -> statement .)
+    write           reduce using rule 2 (statement_list -> statement .)
+    $end            reduce using rule 2 (statement_list -> statement .)
+    else            reduce using rule 2 (statement_list -> statement .)
+    endif           reduce using rule 2 (statement_list -> statement .)
+    wend            reduce using rule 2 (statement_list -> statement .)
+
+
+state 3
+
+    (3) statement -> read_statement .
+
+    read            reduce using rule 3 (statement -> read_statement .)
+    if              reduce using rule 3 (statement -> read_statement .)
+    while           reduce using rule 3 (statement -> read_statement .)
+    write           reduce using rule 3 (statement -> read_statement .)
+    $end            reduce using rule 3 (statement -> read_statement .)
+    else            reduce using rule 3 (statement -> read_statement .)
+    endif           reduce using rule 3 (statement -> read_statement .)
+    wend            reduce using rule 3 (statement -> read_statement .)
+
+
+state 4
+
+    (4) statement -> if_statement .
+
+    read            reduce using rule 4 (statement -> if_statement .)
+    if              reduce using rule 4 (statement -> if_statement .)
+    while           reduce using rule 4 (statement -> if_statement .)
+    write           reduce using rule 4 (statement -> if_statement .)
+    $end            reduce using rule 4 (statement -> if_statement .)
+    else            reduce using rule 4 (statement -> if_statement .)
+    endif           reduce using rule 4 (statement -> if_statement .)
+    wend            reduce using rule 4 (statement -> if_statement .)
+
+
+state 5
+
+    (5) statement -> while_statement .
+
+    read            reduce using rule 5 (statement -> while_statement .)
+    if              reduce using rule 5 (statement -> while_statement .)
+    while           reduce using rule 5 (statement -> while_statement .)
+    write           reduce using rule 5 (statement -> while_statement .)
+    $end            reduce using rule 5 (statement -> while_statement .)
+    else            reduce using rule 5 (statement -> while_statement .)
+    endif           reduce using rule 5 (statement -> while_statement .)
+    wend            reduce using rule 5 (statement -> while_statement .)
+
+
+state 6
+
+    (6) statement -> write_statement .
+
+    read            reduce using rule 6 (statement -> write_statement .)
+    if              reduce using rule 6 (statement -> write_statement .)
+    while           reduce using rule 6 (statement -> write_statement .)
+    write           reduce using rule 6 (statement -> write_statement .)
+    $end            reduce using rule 6 (statement -> write_statement .)
+    else            reduce using rule 6 (statement -> write_statement .)
+    endif           reduce using rule 6 (statement -> write_statement .)
+    wend            reduce using rule 6 (statement -> write_statement .)
+
+
+state 7
+
+    (7) read_statement -> read . ID SEMICOLON
+
+    ID              shift and go to state 12
+
+
+state 8
+
+    (8) if_statement -> if . parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> if . condition then statement_list else_statement endif SEMICOLON
+    (12) condition -> . BOOL
+
+    parentesis_izq  shift and go to state 13
+    BOOL            shift and go to state 15
+
+    condition                      shift and go to state 14
+
+state 9
+
+    (13) while_statement -> while . condition do statement_list wend SEMICOLON
+    (12) condition -> . BOOL
+
+    BOOL            shift and go to state 15
+
+    condition                      shift and go to state 16
+
+state 10
+
+    (14) write_statement -> write . expression SEMICOLON
+    (15) expression -> . ID
+    (16) expression -> . NUM
+    (17) expression -> . expression OPERATOR expression
+
+    ID              shift and go to state 18
+    NUM             shift and go to state 19
+
+    expression                     shift and go to state 17
+
+state 11
+
+    (1) statement_list -> statement_list statement .
+
+    read            reduce using rule 1 (statement_list -> statement_list statement .)
+    if              reduce using rule 1 (statement_list -> statement_list statement .)
+    while           reduce using rule 1 (statement_list -> statement_list statement .)
+    write           reduce using rule 1 (statement_list -> statement_list statement .)
+    $end            reduce using rule 1 (statement_list -> statement_list statement .)
+    else            reduce using rule 1 (statement_list -> statement_list statement .)
+    endif           reduce using rule 1 (statement_list -> statement_list statement .)
+    wend            reduce using rule 1 (statement_list -> statement_list statement .)
+
+
+state 12
+
+    (7) read_statement -> read ID . SEMICOLON
+
+    SEMICOLON       shift and go to state 20
+
+
+state 13
+
+    (8) if_statement -> if parentesis_izq . condition parentesis_der then statement_list endif SEMICOLON
+    (12) condition -> . BOOL
+
+    BOOL            shift and go to state 15
+
+    condition                      shift and go to state 21
+
+state 14
+
+    (9) if_statement -> if condition . then statement_list else_statement endif SEMICOLON
+
+    then            shift and go to state 22
+
+
+state 15
+
+    (12) condition -> BOOL .
+
+    then            reduce using rule 12 (condition -> BOOL .)
+    do              reduce using rule 12 (condition -> BOOL .)
+    parentesis_der  reduce using rule 12 (condition -> BOOL .)
+
+
+state 16
+
+    (13) while_statement -> while condition . do statement_list wend SEMICOLON
+
+    do              shift and go to state 23
+
+
+state 17
+
+    (14) write_statement -> write expression . SEMICOLON
+    (17) expression -> expression . OPERATOR expression
+
+    SEMICOLON       shift and go to state 24
+    OPERATOR        shift and go to state 25
+
+
+state 18
+
+    (15) expression -> ID .
+
+    SEMICOLON       reduce using rule 15 (expression -> ID .)
+    OPERATOR        reduce using rule 15 (expression -> ID .)
+
+
+state 19
+
+    (16) expression -> NUM .
+
+    SEMICOLON       reduce using rule 16 (expression -> NUM .)
+    OPERATOR        reduce using rule 16 (expression -> NUM .)
+
+
+state 20
+
+    (7) read_statement -> read ID SEMICOLON .
+
+    read            reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    if              reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    while           reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    write           reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    $end            reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    else            reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    endif           reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+    wend            reduce using rule 7 (read_statement -> read ID SEMICOLON .)
+
+
+state 21
+
+    (8) if_statement -> if parentesis_izq condition . parentesis_der then statement_list endif SEMICOLON
+
+    parentesis_der  shift and go to state 26
+
+
+state 22
+
+    (9) if_statement -> if condition then . statement_list else_statement endif SEMICOLON
+    (1) statement_list -> . statement_list statement
+    (2) statement_list -> . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement_list                 shift and go to state 27
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 23
+
+    (13) while_statement -> while condition do . statement_list wend SEMICOLON
+    (1) statement_list -> . statement_list statement
+    (2) statement_list -> . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement_list                 shift and go to state 28
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 24
+
+    (14) write_statement -> write expression SEMICOLON .
+
+    read            reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    if              reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    while           reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    write           reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    $end            reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    else            reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    endif           reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+    wend            reduce using rule 14 (write_statement -> write expression SEMICOLON .)
+
+
+state 25
+
+    (17) expression -> expression OPERATOR . expression
+    (15) expression -> . ID
+    (16) expression -> . NUM
+    (17) expression -> . expression OPERATOR expression
+
+    ID              shift and go to state 18
+    NUM             shift and go to state 19
+
+    expression                     shift and go to state 29
+
+state 26
+
+    (8) if_statement -> if parentesis_izq condition parentesis_der . then statement_list endif SEMICOLON
+
+    then            shift and go to state 30
+
+
+state 27
+
+    (9) if_statement -> if condition then statement_list . else_statement endif SEMICOLON
+    (1) statement_list -> statement_list . statement
+    (10) else_statement -> . else statement_list
+    (11) else_statement -> .
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    else            shift and go to state 32
+    endif           reduce using rule 11 (else_statement -> .)
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    else_statement                 shift and go to state 31
+    statement                      shift and go to state 11
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 28
+
+    (13) while_statement -> while condition do statement_list . wend SEMICOLON
+    (1) statement_list -> statement_list . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    wend            shift and go to state 33
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement                      shift and go to state 11
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 29
+
+    (17) expression -> expression OPERATOR expression .
+    (17) expression -> expression . OPERATOR expression
+
+  ! shift/reduce conflict for OPERATOR resolved as shift
+    SEMICOLON       reduce using rule 17 (expression -> expression OPERATOR expression .)
+    OPERATOR        shift and go to state 25
+
+  ! OPERATOR        [ reduce using rule 17 (expression -> expression OPERATOR expression .) ]
+
+
+state 30
+
+    (8) if_statement -> if parentesis_izq condition parentesis_der then . statement_list endif SEMICOLON
+    (1) statement_list -> . statement_list statement
+    (2) statement_list -> . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement_list                 shift and go to state 34
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 31
+
+    (9) if_statement -> if condition then statement_list else_statement . endif SEMICOLON
+
+    endif           shift and go to state 35
+
+
+state 32
+
+    (10) else_statement -> else . statement_list
+    (1) statement_list -> . statement_list statement
+    (2) statement_list -> . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement_list                 shift and go to state 36
+    statement                      shift and go to state 2
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 33
+
+    (13) while_statement -> while condition do statement_list wend . SEMICOLON
+
+    SEMICOLON       shift and go to state 37
+
+
+state 34
+
+    (8) if_statement -> if parentesis_izq condition parentesis_der then statement_list . endif SEMICOLON
+    (1) statement_list -> statement_list . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    endif           shift and go to state 38
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement                      shift and go to state 11
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 35
+
+    (9) if_statement -> if condition then statement_list else_statement endif . SEMICOLON
+
+    SEMICOLON       shift and go to state 39
+
+
+state 36
+
+    (10) else_statement -> else statement_list .
+    (1) statement_list -> statement_list . statement
+    (3) statement -> . read_statement
+    (4) statement -> . if_statement
+    (5) statement -> . while_statement
+    (6) statement -> . write_statement
+    (7) read_statement -> . read ID SEMICOLON
+    (8) if_statement -> . if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON
+    (9) if_statement -> . if condition then statement_list else_statement endif SEMICOLON
+    (13) while_statement -> . while condition do statement_list wend SEMICOLON
+    (14) write_statement -> . write expression SEMICOLON
+
+    endif           reduce using rule 10 (else_statement -> else statement_list .)
+    read            shift and go to state 7
+    if              shift and go to state 8
+    while           shift and go to state 9
+    write           shift and go to state 10
+
+    statement                      shift and go to state 11
+    read_statement                 shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    write_statement                shift and go to state 6
+
+state 37
+
+    (13) while_statement -> while condition do statement_list wend SEMICOLON .
+
+    read            reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    if              reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    while           reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    write           reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    $end            reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    else            reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    endif           reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+    wend            reduce using rule 13 (while_statement -> while condition do statement_list wend SEMICOLON .)
+
+
+state 38
+
+    (8) if_statement -> if parentesis_izq condition parentesis_der then statement_list endif . SEMICOLON
+
+    SEMICOLON       shift and go to state 40
+
+
+state 39
+
+    (9) if_statement -> if condition then statement_list else_statement endif SEMICOLON .
+
+    read            reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    if              reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    while           reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    write           reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    $end            reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    else            reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    endif           reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+    wend            reduce using rule 9 (if_statement -> if condition then statement_list else_statement endif SEMICOLON .)
+
+
+state 40
+
+    (8) if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .
+
+    read            reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    if              reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    while           reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    write           reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    $end            reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    else            reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    endif           reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+    wend            reduce using rule 8 (if_statement -> if parentesis_izq condition parentesis_der then statement_list endif SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for OPERATOR in state 29 resolved as shift
