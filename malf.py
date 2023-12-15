@@ -92,7 +92,13 @@ def p_assignment_statement(p):
 
 def p_read_statement(p):
     'read_statement : read ID SEMICOLON'
-    print(f"Read: {p[2]}")
+    variable_name = p[2]
+    user_input = input(f"Enter value for {variable_name}: ")
+    try:
+        variables[variable_name] = int(user_input)
+        print(f"{variable_name} set to {user_input}")
+    except ValueError:
+        print(f"Error: {user_input} is not a valid integer.")
 
 def p_if_statement(p):
     '''
@@ -116,7 +122,7 @@ def p_while_statement(p):
 
 def p_write_statement(p):
     'write_statement : write expression SEMICOLON'
-    pass
+    print(p[2])
 
 def p_expression(p):
     '''
@@ -129,9 +135,40 @@ def p_expression(p):
 
 def p_operando_statement(p):
     '''
-    operando_statement : expression OPERATOR expression    
+    operando_statement : expression OPERATOR expression
+                        | expression OPERATOR ID    
     '''
-    pass
+    if p[2] == '+':
+        p[0] = p[1] + p[3]
+    elif p[2] == '-':
+        p[0] = p[1] - p[3]
+    elif p[2] == '*':
+        p[0] = p[1] * p[3]
+    elif p[2] == '/':
+        if p[3] != 0:
+            p[0] = p[1] / p[3]
+        else:
+            print("Error: Division by zero")
+            p[0] = None
+    elif p[2] == '%':
+        if isinstance(p[1], int) and isinstance(p[3], int):
+            p[0] = p[1] % p[3]
+        else:
+            print("Error: Modulo operation requires integer operands")
+            p[0] = None
+    elif p[2] == '<':
+        p[0] = p[1] < p[3]
+    elif p[2] == '<=':
+        p[0] = p[1] <= p[3]
+    elif p[2] == '>':
+        p[0] = p[1] > p[3]
+    elif p[2] == '>=':
+        p[0] = p[1] >= p[3]
+    elif p[2] == '==':
+        p[0] = p[1] == p[3]
+    elif p[2] == '!=':
+        p[0] = p[1] != p[3]
+
 
 # Definición de errores sintácticos
 def p_error(p):
@@ -145,8 +182,7 @@ lexer = lex.lex()
 parser = yacc.yacc()
 lexer = lex.lex()
 
-codigo = """$num1 = 5;
-$num1 = 6;"""
+codigo = """write 1;"""
 
 result = parser.parse(codigo, lexer=lexer)
 print("Variables después de la ejecución:", variables)
