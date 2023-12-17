@@ -1,9 +1,10 @@
 import ply.lex as lex
 import ply.yacc as yacc
-global variables
-variables = {}
+import re
 global errores
+global variables
 errores = 0
+variables = {}
 def gramatica(codigo):
     # Definición de tokens
     tokens = (
@@ -92,10 +93,14 @@ def gramatica(codigo):
 
     def p_assignment_statement(p):
         'assignment_statement : ID EQUALS expression SEMICOLON'
+
         pass
 
     def p_read_statement(p):
         'read_statement : read ID SEMICOLON'
+        global variables
+        variable_name = p[2]
+        variables[variable_name] = None
         pass
 
     def p_if_statement(p):
@@ -151,16 +156,38 @@ def gramatica(codigo):
     lexer = lex.lex()
     parser = yacc.yacc()
     lexer = lex.lex()
+    print("variables: ", variables)
     parser.parse(codigo, lexer=lexer)
-    return 
+    return 1
 
 # ejecutar codigo
 def ejecutar(codigo):
-    
-    
+    global variables
+    def puntero(variable):
+        return variables[variable]
+    variable_count = 0
+    for linea in codigo.splitlines():
+        if linea.startswith("write"):
+            print(linea[6:-1])
+        elif linea.startswith("read"):
+            variable = '$'+linea.split('$')[1].split(';')[0]
+            variables[variable] = input(f"Ingrese un valor para {variable}:  ")
+            if variables[variable] == '':
+                print("Error: No se ingresó ningún valor")
+                return 0
+            print(variables)
+        
+        elif linea.startswith("if"):
+            print(linea)
+            if linea.split('(')[1].split(')')[0] == 'true':
+                print("if true")
+            else:
+                print("if false")
+    pass
 
 codigo = """write 1;
 read $a;
+read         $b;
 if ($a != $b) then
     write 1;
     $a = 1;
@@ -169,7 +196,7 @@ if ($a != $b) then
 else
     write 0;
 endif;"""
-
+gramatica(codigo)
 if (errores == 0):
     print("---- El código es correcto ----")
     ejecutar(codigo)
